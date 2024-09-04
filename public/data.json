@@ -1,0 +1,56 @@
+[
+  {
+    "question": "Adiniz nedir",
+    "answers":["nermin", "aytac", "nazli","xanim","mehin"],
+    "incorrect": ["nermin", "aytac", "nazli","mehin"],
+    "correct": ["xanim"]
+  },
+  {
+    "question": "How much is 2+2?",
+    "answers":[4,8,12,24,6],
+    "incorrect": [8,12,24,6],
+    "correct": [4]
+  },{
+    "question": "How much is 12+2?",
+    "answers":[4,8,14,24,6],
+    "incorrect": [4,8,24,6],
+    "correct": [14]
+  },
+  {
+    "question": "How much is 2+2?",
+    "answers":[4,8,12,24,6],
+    "incorrect": [8,12,24,6],
+    "correct": [4]
+  },{
+    "question": "How much is 12+2?",
+    "answers":[4,8,14,24,6],
+    "incorrect": [4,8,24,6],
+    "correct": [14]
+  },  {
+    "question": "How much is 2+2?",
+    "answers":[4,8,12,24,6],
+    "incorrect": [8,12,24,6],
+    "correct": [4]
+  },{
+    "question": "How much is 12+2?",
+    "answers":[4,8,14,24,6],
+    "incorrect": [4,8,24,6],
+    "correct": [14]
+  },  {
+    "question": "How much is 2+2?",
+    "answers":[4,8,12,24,6],
+    "incorrect": [8,12,24,6],
+    "correct": [4]
+  },{
+    "question": "How much is 12+2?",
+    "answers":[4,8,14,24,6],
+    "incorrect": [4,8,24,6],
+    "correct": [14]
+  },{
+    "question": "How much is 12+2?",
+    "answers":[4,8,14,24,6],
+    "incorrect": [4,8,24,6],
+    "correct": [14]
+  }
+
+]
