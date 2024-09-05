@@ -61,12 +61,12 @@ function Quiz() {
     <div>
       {/* {showAlert && <Alert severity="error">This is wrong answer</Alert>} */}
       {
-        questionIndex <= 9 ?   <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
+        questionIndex+1 <= questions.length ?   <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
         {questions && (
           <div>
             <h1 className="mb-6 text-white text-3xl font-bold">
               {" "}
-              {questionIndex + 1}/10. {questions[questionIndex].question}
+              {questionIndex + 1}/{questions.length}. {questions[questionIndex].question}
             </h1>
             <ul className="flex flex-wrap gap-4  items-center justify-center ">
               {questions[questionIndex].answers.map((answer, i) => (

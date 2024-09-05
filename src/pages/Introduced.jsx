@@ -33,13 +33,13 @@ function Introduced() {
             onClick={isOpen}
             className="border-2 hover:bg-[#cf2943] hover:border-none hover:text-white border-gray-400	rounded-lg p-3 cursor-pointer text-2xl"
           >
-            Neticeleri gor
+            Neticeleri gor 
           </div>
         </div>
       </div>
       {showModal && (
         <Port>
-          <p>score</p>
+          <p>score </p>
           <p>date</p>
           <button className="modal-close" onClick={isClose}>
             X
