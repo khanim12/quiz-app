@@ -5,12 +5,18 @@ import Port from "./Port";
 function Introduced() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const isOpen =()=> setShowModal(true);
-  const isClose =()=> setShowModal(false);
+  const isOpen = () => setShowModal(true);
+  const isClose = () => setShowModal(false);
   const gotoQuizPage = () => {
     navigate("/quiz");
   };
-  
+
+  // const getScores = () => {
+  //   const scores = localStorage.getItem("currentAnswer");
+  //   const score = JSON.parse(scores);
+    
+  // }
+
   return (
     <div>
       <div className="w-96 m-auto mt-10 ">
@@ -29,25 +35,18 @@ function Introduced() {
           >
             Neticeleri gor
           </div>
-          
         </div>
       </div>
-      {
-          showModal &&    <Port >
+      {showModal && (
+        <Port>
           <p>score</p>
-        <p>date</p>
-        <button className="modal-close" onClick={isClose}>X</button>
+          <p>date</p>
+          <button className="modal-close" onClick={isClose}>
+            X
+          </button>
         </Port>
-      
-      }
-      </div>
-        
-    
-      
-       
-        
-       
-  
+      )}
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  // const [getAnswerss,setGetAnswerss]=useState([])
   const isOpen = () => setShowModal(true);
   const isClose = () => setShowModal(false);
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Quiz() {
     };
     fetchData();
   }, []);
-
+// localStorage.setItem('currentAnswer',JSON.stringify(currentAnswer))
   if (questions.length === 0) {
     return <h1>Suallar hele yuklenmeyib</h1>;
   }
@@ -39,24 +40,28 @@ function Quiz() {
   };
   const handleClick = (answer) => {
     setCurrentAnswer(answer);
+    setQuestionIndex(questionIndex + 1);
+
     // if (currentAnswer === questions[questionIndex].correct) {
     //   alert("cavab duzgundur");
     // } else {
     //   alert("cavab yanlisdir");
     // }
     if (answer == questions[questionIndex].correct) {
-      setQuestionIndex(questionIndex + 1);
-      setShowAlert(false);
+      // setShowAlert(false);
       setScore(score+100)
     } else {
       setShowAlert(true);
     }
   };
 
+  // const getAnswer = JSON.parse(localStorage.setItem('currentAnswer', "neticeleri"))
+  
   return (
     <div>
-      {showAlert && <Alert severity="error">This is wrong answer</Alert>}
-      <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
+      {/* {showAlert && <Alert severity="error">This is wrong answer</Alert>} */}
+      {
+        questionIndex <= 9 ?   <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
         {questions && (
           <div>
             <h1 className="mb-6 text-white text-3xl font-bold">
@@ -110,11 +115,21 @@ function Quiz() {
               <p>Tarix və Vaxt: {new Date().toLocaleString()}</p>
               <button className="modal-close" onClick={isClose}>
                 X
-              </button>
+              </button><Button variant="contained" color="success" onClick={()=>navigate('/')}>Yeniden Basla</Button>
             </Port>
           )}
         </div>
-      </div>
+      </div> : <Port>
+              <p>Score is {score }</p>
+              <p>Tarix və Vaxt: {new Date().toLocaleString()}</p>
+              <button className="modal-close" onClick={isClose}>
+                X
+            </button>
+            <Button variant="contained" color="success" onClick={() => navigate('/')}>Yeniden Basla</Button>
+            {/* <p>{getAnswer===questions[questionIndex].correct ? <p>correct answer</p> : <p>yamlis</p>}</p> */}
+            </Port>
+      }
+     
     </div>
   );
 }
