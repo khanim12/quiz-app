@@ -22,7 +22,7 @@ function Quiz() {
     };
     fetchData();
   }, []);
-// localStorage.setItem('currentAnswer',JSON.stringify(currentAnswer))
+  // localStorage.setItem('currentAnswer',JSON.stringify(currentAnswer))
   if (questions.length === 0) {
     return <h1>Suallar hele yuklenmeyib</h1>;
   }
@@ -40,33 +40,29 @@ function Quiz() {
   };
   const handleClick = (answer) => {
     setCurrentAnswer(answer);
-    setQuestionIndex(questionIndex + 1);
+    if (questionIndex + 1 === 5) {
+      isOpen();
+    } else {
+      setQuestionIndex(questionIndex + 1);
+    }
 
-    // if (currentAnswer === questions[questionIndex].correct) {
-    //   alert("cavab duzgundur");
-    // } else {
-    //   alert("cavab yanlisdir");
-    // }
     if (answer == questions[questionIndex].correct) {
-      // setShowAlert(false);
-      setScore(score+100)
+      setScore(score + 100);
     } else {
       setShowAlert(true);
     }
   };
-
   // const getAnswer = JSON.parse(localStorage.setItem('currentAnswer', "neticeleri"))
-  
+
   return (
     <div>
-      {/* {showAlert && <Alert severity="error">This is wrong answer</Alert>} */}
-      {
-        questionIndex+1 <= questions.length ?   <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
+      <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
         {questions && (
           <div>
             <h1 className="mb-6 text-white text-3xl font-bold">
               {" "}
-              {questionIndex + 1}/{questions.length}. {questions[questionIndex].question}
+              {questionIndex + 1}/{questions.length}.{" "}
+              {questions[questionIndex].question}
             </h1>
             <ul className="flex flex-wrap gap-4  items-center justify-center ">
               {questions[questionIndex].answers.map((answer, i) => (
@@ -111,25 +107,22 @@ function Quiz() {
           )}
           {showModal && (
             <Port>
-              <p>Score is {score }</p>
+              <p>Score is {score}</p>
               <p>Tarix və Vaxt: {new Date().toLocaleString()}</p>
               <button className="modal-close" onClick={isClose}>
                 X
-              </button><Button variant="contained" color="success" onClick={()=>navigate('/')}>Yeniden Basla</Button>
+              </button>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => navigate("/")}
+              >
+                Yeniden Basla
+              </Button>
             </Port>
           )}
         </div>
-      </div> : <Port>
-              <p>Score is {score }</p>
-              <p>Tarix və Vaxt: {new Date().toLocaleString()}</p>
-              <button className="modal-close" onClick={isClose}>
-                X
-            </button>
-            <Button variant="contained" color="success" onClick={() => navigate('/')}>Yeniden Basla</Button>
-            {/* <p>{getAnswer===questions[questionIndex].correct ? <p>correct answer</p> : <p>yamlis</p>}</p> */}
-            </Port>
-      }
-     
+      </div>
     </div>
   );
 }
