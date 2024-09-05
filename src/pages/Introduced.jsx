@@ -27,13 +27,13 @@ function Introduced() {
             className="hover:bg-[#cf2943] hover:border-none hover:text-white border-2 border-gray-400 rounded-lg p-3 text-2xl cursor-pointer w-1/2  "
           >
             {" "}
-            Imtahana basla
+            Start Quiz
           </div>
           <div
             onClick={isOpen}
             className="border-2 hover:bg-[#cf2943] hover:border-none hover:text-white border-gray-400	rounded-lg p-3 cursor-pointer text-2xl"
           >
-            Neticeleri gor 
+            Show Result  
           </div>
         </div>
       </div>

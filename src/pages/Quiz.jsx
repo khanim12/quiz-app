@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Port from "./Port";
+import "./quiz.css";
 function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -14,15 +15,25 @@ function Quiz() {
   const isOpen = () => setShowModal(true);
   const isClose = () => setShowModal(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios("./data.json");
-      setQuestions(response.data);
-      console.log;
+
+      const _questions = response.data.map((q) => {
+        return {
+          ...q,
+          selectedAnswer: null,
+          
+        };
+      
+      });
+      setQuestions(_questions);
+     
+
     };
     fetchData();
   }, []);
-  // localStorage.setItem('currentAnswer',JSON.stringify(currentAnswer))
   if (questions.length === 0) {
     return <h1>Suallar hele yuklenmeyib</h1>;
   }
@@ -39,12 +50,18 @@ function Quiz() {
     setQuestionIndex(questionIndex + 1);
   };
   const handleClick = (answer) => {
+    const updateQuestions = [...questions];
+    updateQuestions[questionIndex].selectedAnswer = answer;
+    setQuestions(updateQuestions)
     setCurrentAnswer(answer);
     if (questionIndex + 1 === 5) {
       isOpen();
     } else {
+      // Burada statedeki hemin suali tapib. Hemin sualin selectedAnswerini secilen deyere beraber edirik.
+
       setQuestionIndex(questionIndex + 1);
     }
+
 
     if (answer == questions[questionIndex].correct) {
       setScore(score + 100);
@@ -52,8 +69,14 @@ function Quiz() {
       setShowAlert(true);
     }
   };
+  const getAnswerClass = (answer) => {
+    const selectedAnswer = questions[questionIndex].selectedAnswer;
+    if (selectedAnswer) {
+      return answer === questions[questionIndex].correct[0] ? "bg-green-400" : "bg-red-400";
+    }
+    return "bg-red-400"; // Default rəng
+  };
   // const getAnswer = JSON.parse(localStorage.setItem('currentAnswer', "neticeleri"))
-
   return (
     <div>
       <div className="flex flex-col items-center justify-center  bg-gradient-to-r from-violet-500 to-fuchsia-500 h-screen	">
@@ -68,7 +91,10 @@ function Quiz() {
               {questions[questionIndex].answers.map((answer, i) => (
                 <li
                   onClick={() => handleClick(answer)}
-                  className="cursor-pointer hover:bg-pink-300 rounded-3xl  w-full bg-red-400 p-2 pointer-cursor text-center flex items-center justify-center text-white capitalize border-solid border-black flex  "
+                  // selectedAnswer === answer yasil ele
+                  className={`
+               ${getAnswerClass(answer)}
+                    cursor-pointer hover:bg-pink-300 rounded-3xl  w-full bg-red-400 p-2 pointer-cursor text-center flex items-center justify-center text-white capitalize border-solid border-black flex`}
                   key={i}
                 >
                   {answer}
@@ -93,7 +119,7 @@ function Quiz() {
               color="success"
               onClick={isOpen}
             >
-              Neticeleri Gor
+              Show Result
             </Button>
           ) : (
             <Button
@@ -108,7 +134,7 @@ function Quiz() {
           {showModal && (
             <Port>
               <p>Score is {score}</p>
-              <p>Tarix və Vaxt: {new Date().toLocaleString()}</p>
+              <p>Date: {new Date().toLocaleString()}</p>
               <button className="modal-close" onClick={isClose}>
                 X
               </button>
@@ -117,7 +143,7 @@ function Quiz() {
                 color="success"
                 onClick={() => navigate("/")}
               >
-                Yeniden Basla
+                Restart
               </Button>
             </Port>
           )}

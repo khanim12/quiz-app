@@ -19,8 +19,8 @@
   {
     "question": "Which planet is known as the Red Planet?",
     "answers": [
-      "Mars",
-      "Earth",
+      
+      "Earth","Mars",
       "Jupiter",
       "Saturn"
     ],
